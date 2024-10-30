@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repetición de Grupos en Máquina de Turing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #5a67d8;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4c51bf;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Repetición de Grupos en Máquina de Turing</h1>
+        <p>Ingresa la cadena en formato <code>111011</code>:</p>
+        <input type="text" id="inputString" placeholder="Ejemplo: 111011">
+        <button onclick="procesarCadena()">Procesar</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function procesarCadena() {
+            const inputString = document.getElementById("inputString").value;
+
+            // Validación: asegurar que la cadena tenga dos grupos de 1s separados por un 0
+            if (!/^[1]+0[1]+$/.test(inputString)) {
+                document.getElementById("result").innerText = "Por favor ingresa una cadena válida en el formato 111011.";
+                return;
+            }
+
+            // Separar la cadena en dos partes usando el 0 como divisor
+            const [grupo1, grupo2] = inputString.split('0');
+
+            // Contar el número de '1's en el segundo grupo
+            const repeticiones = grupo2.length;
+
+            // Repetir el primer grupo tantas veces como '1's haya en el segundo grupo
+            const resultadoRepetido = grupo1.repeat(repeticiones);
+
+            // Concatenar la cadena original y la cadena repetida separadas por un 0
+            const resultadoFinal = ${inputString}0${resultadoRepetido};
+
+            // Mostrar el resultado
+            document.getElementById("result").innerHTML = `
+                <p>Cadena ingresada: ${inputString}</p>
+                <p>Cadena resultante: ${resultadoFinal}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
